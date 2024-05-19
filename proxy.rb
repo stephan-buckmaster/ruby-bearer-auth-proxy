@@ -3,6 +3,10 @@ require 'rack/rewindable_input'
 
 class BearerAuthentication < Rack::Proxy
 
+  def initialize(app, valid_token)
+    @valid_token = valid_token
+    @app = app
+  end
 
   def call(env)
     # Authenticate the request using Bearer Authentication
@@ -11,7 +15,7 @@ class BearerAuthentication < Rack::Proxy
       return [401, {}, ['No bearer token was provided']]
     end
 
-    unless (bearer_token == 'Bearer valid-token') # Wow we are really doing a simple compare
+    unless (bearer_token == "Bearer #{@valid_token}") # Wow we are really doing a simple compare
       return [401, {}, ['Invalid bearer token']]
     end
 
