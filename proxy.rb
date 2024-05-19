@@ -1,13 +1,8 @@
 require 'rack/proxy'
 require 'rack/rewindable_input'
-#require 'rack/auth/bearer'
 
+class BearerAuthentication < Rack::Proxy
 
-class Proxy < Rack::Proxy
-
-  def initialize(app)
-    @app = Rack::RewindableInput::Middleware.new(Rack::Proxy.new(backend: 'http://localhost:10000'))
-  end
 
   def call(env)
     # Authenticate the request using Bearer Authentication
