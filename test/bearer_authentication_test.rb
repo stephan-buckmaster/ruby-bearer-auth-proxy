@@ -1,5 +1,5 @@
 require "test/unit"
-require_relative File.dirname(__FILE__) + "/../../bearer_authentication.rb"
+require "./bearer_authentication"
 
 class TestApp
   def call(env)
@@ -9,9 +9,9 @@ end
 
 class BearerAuthenticationTest < Test::Unit::TestCase
 
-  # The test_token_hashes are those of test-token-1 and test-token-2
+  # The test_token_hashes include the hash of abcdef
   def setup
-    @test_object = BearerAuthentication.new(TestApp.new, "test/test_token_hashes")
+    @test_object = BearerAuthentication.new(TestApp.new, File.dirname(__FILE__) + "/test_token_hashes")
   end
 
   def test_validates_authorization_none_given
@@ -29,18 +29,13 @@ class BearerAuthenticationTest < Test::Unit::TestCase
     assert_equal [401, {}, ["No bearer token was provided"]], @test_object.call(headers)
   end
 
-  def test_validates_authorization_valid_given_1
-    headers = {"HTTP_AUTHORIZATION" => "Bearer testing-token-1"}
-    assert_equal [200, {}, "TestApp called"], @test_object.call(headers)
-  end
-
-  def test_validates_authorization_valid_given_2
-    headers = {"HTTP_AUTHORIZATION" => "Bearer testing-token-2"}
+  def test_validates_authorization_valid_given
+    headers = {"HTTP_AUTHORIZATION" => "Bearer abcdef"}
     assert_equal [200, {}, "TestApp called"], @test_object.call(headers)
   end
 
   def test_validates_authorization_passes_on_ENV_except_Authorization
-    headers = {"HTTP_AUTHORIZATION" => "Bearer testing-token-1", "other-header" => "other-value"}
+    headers = {"HTTP_AUTHORIZATION" => "Bearer abcdef", "other-header" => "other-value"}
     assert_equal [200, {"other-header" => "other-value"}, "TestApp called"], @test_object.call(headers)
   end
 

@@ -21,10 +21,10 @@ class BearerAuthentication
 
     bearer_token_hash = Digest::SHA256.hexdigest(bearer_token.strip)
     unless @valid_token_hashes.include?(bearer_token_hash)
-      return [401, {}, ['Invalid bearer token']]
+      return [401, {}, ["Invalid bearer token"]]
     end
 
-    env.delete('HTTP_AUTHORIZATION') # unless the upstream wants it too?
+    env.delete("HTTP_AUTHORIZATION") # don't pass on the secret token
     @app.call(env)
   end
 end

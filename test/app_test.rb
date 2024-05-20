@@ -5,7 +5,7 @@ require "test/unit"
 require "rack/test"
 require "rackup/handler/webrick"
 
-require_relative File.dirname(__FILE__) + '/../../app.rb'
+require './app'
 
 class AppTest < Test::Unit::TestCase
   include Rack::Test::Methods
@@ -38,7 +38,7 @@ class AppTest < Test::Unit::TestCase
   end
 
   def test_get_valid_token_from_several
-    stub_valid_tokens('abcdefghi', 'abcdefg')
+    stub_valid_tokens('abcdefghi', 'abcdef')
     StubServer.open(123456, {"/" => [200, {}, ["Hello World of Testers"]] }) do |server|
       server.wait
       get '/', nil, {'HTTP_AUTHORIZATION' => 'Bearer abcdefghi'}

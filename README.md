@@ -72,3 +72,10 @@ curl -H 'Authentication: Bearer not-one-of-your-tokens-from-step-1' http://192.1
 ```
 
 Exercise: What happens when there is no Authentication header? Or when it doesn't have a Bearer?
+
+
+### Tests
+Tests can be executed with the usual rake command, or individually as in 
+```
+ruby test/app_test.rb
+```
