@@ -2,14 +2,13 @@ require 'stub_server'
 require "test/unit"
 require "rack/test"
 require "rackup/handler/webrick"
+require './create_bearer_auth_proxy_app'
 
-require './create_proxy_app'
-
-class AppTest < Test::Unit::TestCase
+class CreateBearerAuthProxyAppTest < Test::Unit::TestCase
   include Rack::Test::Methods
 
   def app
-    create_proxy_app('test/test_token_hashes', 'http://localhost:123456') # We are starting a test server below
+    CreateBearerAuthProxyApp.create_app('test/test_token_hashes', 'http://localhost:123456') # We are starting a test server below
   end
 
   def test_get_no_authorization

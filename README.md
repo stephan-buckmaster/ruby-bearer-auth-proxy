@@ -40,7 +40,13 @@ So here is a proxy server, written in Ruby.
 Suppose you have an unprotected server running at http://localhost:12345,
 and you want to make it available on the wider network at port 23456.
 
-1. Add some authentication tokens.
+0. Install required ruby gems
+
+```
+bundle
+```
+
+1. Add some authentication tokens
 
 Run 
 
@@ -48,7 +54,7 @@ Run
 ruby ./add_token_hash.rb >> bearer_token_hashes
 ```
 
-Enter a few tokens, line by line
+Enter a few tokens, line by line.
 
 2. Start the app
 
@@ -75,7 +81,7 @@ Exercise: What happens when there is no Authentication header? Or when it doesn'
 
 
 ### Tests
-Tests can be executed with the usual rake command, or individually as in 
+Tests can be executed with the usual ```rake``` command, or individually as in 
 ```
 ruby test/app_test.rb
 ```
