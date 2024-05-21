@@ -1,4 +1,4 @@
-Bearer Token Authentication Proxy
+Bearer Token Authentication (Reverse) Proxy
 
 This Ruby application provides a simple bearer token authentication
 layer for an unprotected upstream server.
@@ -33,7 +33,7 @@ Whereas using the Authorization header with the format Authorization:
 Bearer <token> is the standardized and recommended approach, there are
 other ways (sections 2.2 and 2.3 in the RFC), but here we only consider that usage.
 
-So here is a proxy server, written in Ruby.
+So here is a reverse proxy server, written in Ruby.
 
 ### Usage
 
