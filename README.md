@@ -80,6 +80,15 @@ curl -H 'Authentication: Bearer not-one-of-your-tokens-from-step-1' http://192.1
 Exercise: What happens when there is no Authentication header? Or when it doesn't have a Bearer?
 
 
+Support for additional ENV entries:
+
+HTTP_HOST. For example, with
+```
+HTTP_HOST=127.0.0.1 UPSTREAM_URL=http://localhost:12345 TOKEN_HASH_FILE=./bearer_token_hashes rackup app.rb -o 0.0.0.0 -p 23456
+```
+
+the HTTP_HOST value of 127.0.0.1 will be used when passing the request to the UPSTREAM_URL
+
 ### Tests
 Tests can be executed with the usual ```rake``` command, or individually as in 
 ```

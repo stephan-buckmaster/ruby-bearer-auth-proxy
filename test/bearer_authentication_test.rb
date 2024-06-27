@@ -39,4 +39,19 @@ class BearerAuthenticationTest < Test::Unit::TestCase
     assert_equal [200, {"other-header" => "other-value"}, "TestApp called"], @test_object.call(headers)
   end
 
+  def test_passes_on_ENV_HTTP_HOST_if_configured
+    headers = {"HTTP_AUTHORIZATION" => "Bearer abcdef", "other-header" => "other-value", "HTTP_HOST" => "abcdef.com"}
+    orig_env = ENV['HTTP_HOST']
+    begin
+      ENV['HTTP_HOST'] = "test-replac.com"
+      assert_equal [200, {"other-header"=>"other-value", "HTTP_HOST"=>"test-replac.com"}, "TestApp called"], @test_object.call(headers)
+    ensure
+      ENV['HTTP_HOST'] = orig_env
+    end
+  end
+
+  def test_leaves_ENV_HTTP_HOST_if_not_configured
+    headers = {"HTTP_AUTHORIZATION" => "Bearer abcdef", "other-header" => "other-value", "HTTP_HOST" => "abcdef.com"}
+    assert_equal [200, {"other-header"=>"other-value", "HTTP_HOST"=>"abcdef.com"}, "TestApp called"], @test_object.call(headers)
+  end
 end

@@ -24,6 +24,8 @@ class BearerAuthentication
       return [401, {}, ["Invalid bearer token"]]
     end
 
+    env["HTTP_HOST"] = ENV["HTTP_HOST"] if ENV["HTTP_HOST"]
+
     env.delete("HTTP_AUTHORIZATION") # don't pass on the secret token
     @app.call(env)
   end
