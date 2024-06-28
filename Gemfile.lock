@@ -5,7 +5,7 @@ GEM
     mustermann (3.0.0)
       ruby2_keywords (~> 0.0.1)
     power_assert (2.0.3)
-    rack (3.0.11)
+    rack (3.1.4)
     rack-protection (4.0.0)
       base64 (>= 0.1.0)
       rack (>= 3.0.0, < 4)
@@ -15,9 +15,9 @@ GEM
       rack (>= 3.0.0)
     rack-test (2.1.0)
       rack (>= 1.3)
-    rackup (2.1.0)
-      rack (>= 3)
-      webrick (~> 1.8)
+    rackup (0.2.3)
+      rack (>= 3.0.0.beta1)
+      webrick
     ruby2_keywords (0.0.5)
     sinatra (4.0.0)
       mustermann (~> 3.0)
@@ -25,12 +25,12 @@ GEM
       rack-protection (= 4.0.0)
       rack-session (>= 2.0.0, < 3)
       tilt (~> 2.0)
-    stub_server (0.6.0)
-      rack
+    stub_server (0.7.0)
+      rackup (~> 0.2.2)
       webrick
     test-unit (3.6.2)
       power_assert
-    tilt (2.3.0)
+    tilt (2.4.0)
     webrick (1.8.1)
 
 PLATFORMS
@@ -43,7 +43,7 @@ DEPENDENCIES
   rack-test
   rackup
   sinatra
-  stub_server
+  stub_server (= 0.7.0)
   test-unit
 
 BUNDLED WITH
