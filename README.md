@@ -89,6 +89,18 @@ HTTP_HOST=127.0.0.1 UPSTREAM_URL=http://localhost:12345 TOKEN_HASH_FILE=./bearer
 
 the HTTP_HOST value of 127.0.0.1 will be used when passing the request to the UPSTREAM_URL
 
+### Basic Auth
+
+Since they are similar, we threw in support for "Basic" HTTP Authentication as well, see https://datatracker.ietf.org/doc/html/rfc7617
+To create user name/password hash file:
+```
+ruby add_user_pwd_hash.rb > user-pwd-hashes
+```
+To start the reverse proxy server:
+```
+HTTP_HOST=localhost HTTP_BASIC_AUTH_HASH_FILE=./user-pwd-hashes UPSTREAM_URL=http://localhost:1234 rackup http_basic_auth_app.rb -p 23456
+```
+
 ### Tests
 Tests can be executed with the usual ```rake``` command, or individually as in 
 ```
